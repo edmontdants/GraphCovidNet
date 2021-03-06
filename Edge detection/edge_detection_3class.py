@@ -17,10 +17,13 @@ import matplotlib.pyplot as plt
 from google.colab.patches import cv2_imshow
 import glob
 
+#applying filter on a single image
 def apply_filter(filename,filter):
   print("reading file---> "+str(filename))
   img=cv2.imread(filename,cv2.IMREAD_GRAYSCALE)
-  img=cv2.resize(img,(250,250))
+
+  #img=cv2.resize(img,(250,250))
+  #comment out the above line if there is memory issue i.e. need to resize all images to smaller dim
 
   h, w = img.shape
   print("shape: "+str(h)+" x "+str(w)+"\n")
@@ -66,27 +69,38 @@ def apply_filter(filename,filter):
 
   return newgradientImage
 
+#function for creating all edge-images of a directory
 def convert_edge_dir(sourcedir,destdir):
   print("\n\n---reading directory "+sourcedir+"---\n")
   filecnt=1
   for filename in glob.glob(sourcedir+'/*'):
-    imagemat=apply_filter(filename,np.array([[-1,0,1],[-1,0,1],[-1,0,1]]))
-    cv2.imwrite(destdir+'/img-'+str(filecnt)+'.png',imagemat)
+    #applying Prewitt filter
+    #for appyling any other filter change filter value accordingly i.e. the 2nd args for apply_filter()
+    imagemat=apply_filter(filename,np.array([[-1,0,1],[-1,0,1],[-1,0,1]])) 
+    cv2.imwrite(destdir+'/img-'+str(filecnt)+'.png',imagemat) #create the edge image and store it to consecutive filenames
     filecnt+=1
   print("\n\n--saved in "+destdir+"--\n")
 
+
+#function for creating all edge-images under covid, non-covid, penumonia directories 
+#since 3-class so COVID, NORMAL, PNEUMONIA present
 def convert_edge_all_dir(coviddir,normdir,pneudir,destdir):
   convert_edge_dir(coviddir,destdir+'/COVID')
   convert_edge_dir(normdir,destdir+'/NORMAL')
   convert_edge_dir(pneudir,destdir+'/PNEUMONIA')
   print("\n---edge detection completed--\n")
 
-datasetdir='/content/drive/My Drive/IEEE,Kaggle'
-coviddir=datasetdir+'/COVID'
-normdir=datasetdir+'/NORMAL'
-pneudir=datasetdir+'/PNEUMONIA'
 
-destdir='/content/drive/My Drive/IEEE_Kaggle_edge/Pretwitt'
+#adjust the source paths accordingly
+datasetdir='/content/drive/My Drive/IEEE,Kaggle'
+coviddir=datasetdir+'/COVID' # source path for covid dir
+normdir=datasetdir+'/NORMAL' #source path for normal dir
+pneudir=datasetdir+'/PNEUMONIA' #source apth for pneumonia dir
+
+
+#adjust the destination directory accordingly
+#directory naming format--> <dataset_name(not necessary conventional)>_edge/<filtername>
+destdir='/content/drive/My Drive/IEEE_Kaggle_edge/Pretwitt' 
 
 convert_edge_all_dir(coviddir,normdir,pneudir,destdir)
 

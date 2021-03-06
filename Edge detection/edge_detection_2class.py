@@ -17,10 +17,14 @@ import matplotlib.pyplot as plt
 from google.colab.patches import cv2_imshow
 import glob
 
+#applying filter on a single image
 def apply_filter(filename,filter):
+
   print("reading file---> "+str(filename))
   img=cv2.imread(filename,cv2.IMREAD_GRAYSCALE)
-  #img=cv2.resize(img,(250,250))
+  
+  #img=cv2.resize(img,(250,250))  
+  #comment out the above line if there is memory issue i.e. need to resize all images to smaller dim
 
   h, w = img.shape
   print("shape: "+str(h)+" x "+str(w)+"\n")
@@ -66,24 +70,35 @@ def apply_filter(filename,filter):
 
   return newgradientImage
 
+#function for creating all edge-images of a directory
 def convert_edge_dir(sourcedir,destdir):
   print("\n\n---reading directory "+sourcedir+"---\n")
-  filecnt=1
+  filecnt=1 
   for filename in glob.glob(sourcedir+'/*'):
+  	#applying Prewitt filter
+  	#for appyling any other filter change filter value accordingly i.e. the 2nd args for apply_filter()
     imagemat=apply_filter(filename,np.array([[-1,0,1],[-1,0,1],[-1,0,1]]))
-    cv2.imwrite(destdir+'/img-'+str(filecnt)+'.png',imagemat)
+    cv2.imwrite(destdir+'/img-'+str(filecnt)+'.png',imagemat) #create the edge image and store it to consecutive filenames
     filecnt+=1
   print("\n\n--saved in "+destdir+"--\n")
 
+#function for creating all edge-images under both covid and non-covid directories 
+#since 2-class so COVID and NON-COVID present
 def convert_edge_all_dir(coviddir,ncoviddir,destdir):
+	
   convert_edge_dir(coviddir,destdir+'/COVID')
   convert_edge_dir(ncoviddir,destdir+'/NON-COVID')
   print("\n---edge detection completed--\n")
 
-coviddir='/content/drive/MyDrive/Github_COVID/CT_COVID/CT_COVID'
-ncoviddir='/content/drive/MyDrive/Github_COVID/CT_NonCOVID/CT_NonCOVID'
 
-destdir='/content/drive/My Drive/Github_edge/Pretwitt'
+#adjust the source paths accordingly
+coviddir='/content/drive/MyDrive/Github_COVID/CT_COVID/CT_COVID' #source path for covid dir
+ncoviddir='/content/drive/MyDrive/Github_COVID/CT_NonCOVID/CT_NonCOVID' #source path for non-covid dir
+
+
+#adjust the destination directory accordingly
+#directory naming format--> <dataset_name(not necessary conventional)>_edge/<filtername>
+destdir='/content/drive/My Drive/Github_edge/Pretwitt' 
 
 convert_edge_all_dir(coviddir,ncoviddir,destdir)
 
