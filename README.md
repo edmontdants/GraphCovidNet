@@ -12,9 +12,9 @@ COVID-19 CT-scan and CXR image detection using GraphCovidNet, a GIN based archit
 2. Then prepare graph-datasets using edge-preparation: Edge preparation/edge_preparation_<class-number>class.py
 3. Finally edge preperation produces five kinds of dataset for graph classification:
   path name: .../GraphTrain/dataset/<dataset_name>/raw/<dataset_name>_<type>.txt
-  <type> can be 
-  (i) A--> adjancency matrix
-  (ii) graph_indicator--> graph-ids of all node
-  (iii) graph_labels--> labels for all graph
-  (iv) node_attributes--> attribute(s) for all node
-  (v) node_labels--> labels for all node
+  <type> can be:
+    1. A--> adjancency matrix 
+    2. graph_indicator--> graph-ids of all node 
+    3. graph_labels--> labels for all graph 
+    4. node_attributes--> attribute(s) for all node 
+    5. node_labels--> labels for all node
