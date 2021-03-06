@@ -7,4 +7,14 @@ COVID-19 CT-scan and CXR image detection using GraphCovidNet, a GIN based archit
 3. covid-chest-xray dataset: https://github.com/ieee8023/covid-chestxray-dataset + Chest X-Ray Images (Pneumonia): https://www.kaggle.com/paultimothymooney/chest-xray-pneumonia , CXR, 3-class
 4. CMSC-678-ML-Project, CXR, 3/4-class: https://github.com/vj2050/Transfer-Learning-COVID-19
 
-# File Structure
+# File Structure and Working procedure
+1. First apply edge detection accroding to the class-number: Edge detection/edge_detection_<class-number>class.py
+2. Then prepare graph-datasets using edge-preparation: Edge preparation/edge_preparation_<class-number>class.py
+3. Finally edge preperation produces five kinds of dataset for graph classification:
+  path name: .../GraphTrain/dataset/<dataset_name>/raw/<dataset_name>_<type>.txt
+  <type> can be 
+  (i) A--> adjancency matrix
+  (ii) graph_indicator--> graph-ids of all node
+  (iii) graph_labels--> labels for all graph
+  (iv) node_attributes--> attribute(s) for all node
+  (v) node_labels--> labels for all node
