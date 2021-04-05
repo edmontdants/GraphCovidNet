@@ -20,5 +20,5 @@ COVID-19 CT-scan and CXR image detection using GraphCovidNet, a GIN based archit
     5. node_labels--> labels for all node
 4. After all the graph datasets are created properly, run main.py. The graph datasets are loaded through dataloader.py and the model is called through model.py
 
-#Our paper
+# Our paper
 We have published our work entitled as "GraphCovidNet: a graph neural network based model for detecting COVID‑19 from CT scans and X‑rays of chest" (Article id- 87523) under the "scientific reports" issue of "nature" journal. Authors of the published manuscript are- Pritam Saha, Debadyuti Mukherjee, Pawan Kumar Singh, Ali Ahmadian, Massimiliano Ferrara and Ram sarkar. 
