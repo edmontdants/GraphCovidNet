@@ -25,7 +25,7 @@ COVID-19 CT-scan and CXR image detection using GraphCovidNet, a GIN based archit
 ```
 
 # Citation
-We have published our work entitled as "GraphCovidNet: a graph neural network based model for detecting COVID‑19 from CT scans and X‑rays of chest" (Article id- 87523) under the "scientific reports" issue of "nature" journal. If this repository helps you in your research in any way, please cite our paper:
+We have published our work entitled as "GraphCovidNet: a graph neural network based model for detecting COVID‑19 from CT scans and X‑rays of chest" under the "scientific reports" issue of "nature" journal. If this repository helps you in your research in any way, please cite our paper:
 ```
 @article{saha2021GraphCovidNet,
   title={GraphCovidNet: a graph neural network based model for detecting COVID‑19 from CT scans and X‑rays of chest}
